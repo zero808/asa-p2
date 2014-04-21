@@ -50,7 +50,6 @@ void fill_with_zeros(int **matrix, int size) {
 int EdmondsKarp(int **E, int **C, int s, int t, int n) {
     int sum = 0;
     int u, v, ix;
-    bool goOn = true;
     //BFS queue
     queue<int> Q;
 /* here: */
@@ -61,10 +60,9 @@ int EdmondsKarp(int **E, int **C, int s, int t, int n) {
         Q.push(s);
 LOOP:
         while(!Q.empty()) {
-            goOn = true;
             u = Q.front();
             Q.pop();
-            for(ix = 0, v = E[u][ix]; (ix < n) && goOn; ++ix, v = E[u][ix]) {
+            for(ix = 0, v = E[u][ix]; (ix < n); ++ix, v = E[u][ix]) {
                 // There is available capacity,
                 // and v is not seen before in search
                 if ((C[u][v] - rc[u][v] > 0) && (pi[v] == -1)) {
@@ -80,7 +78,6 @@ LOOP:
                             rc[v][u] -= cp[t];
                             v = u;
                         }
-                        goOn = false;
                         goto LOOP;
                         /* break; */
                     }
