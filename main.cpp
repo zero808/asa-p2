@@ -4,6 +4,9 @@
 #include <cstring>
 #include <climits>
 #include <queue>
+#include <vector>
+#include <list>
+#include <map>
 
 using namespace std;
 
@@ -17,6 +20,27 @@ int **rc = NULL;
 int *cp = NULL;
 //parents
 int *pi = NULL;
+
+class Vertex {
+    public:
+        Vertex() : id(0) {}
+        Vertex(int _id) : id(_id) {}
+        virtual ~Vertex() { adjacents.clear(); }
+
+        int Id() { return id; }
+        std::list<Vertex*> *Adjacents() { return &adjacents; }
+
+        void setId( int _id) { id = _id; }
+
+        void addAdjacent(Vertex* v) { adjacents.push_back(v); }
+        
+        std::map<int, int> *EdgesUsed() { return &edgesUsed; }
+
+    private:
+        int id;
+        std::list<Vertex*> adjacents;
+        std::map<int, int> edgesUsed;
+};
 
 int **new_matrix(int size) {
     int ix;
@@ -102,6 +126,8 @@ int main(int argc, char const* argv[])
     int ix, jx, kx, res = INT_MAX;
     //to hold the critical points
     int **critical = NULL;
+    
+    std::vector<Vertex*> graph;
 
     scanf("%d %d", &n, &m);
 
