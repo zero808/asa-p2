@@ -30,10 +30,10 @@ class Vertex {
         int Id() { return id; }
         std::list<Vertex*> *Adjacents() { return &adjacents; }
 
-        void setId( int _id) { id = _id; }
+        void setId(int _id) { id = _id; }
+        int getId() { return id; }
 
         void addAdjacent(Vertex* v) { adjacents.push_back(v); }
-        
         std::map<int, int> *EdgesUsed() { return &edgesUsed; }
 
     private:
